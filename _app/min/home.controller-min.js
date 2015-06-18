@@ -1,0 +1,1 @@
+angular.module("portfolio",["ngMaterial"]).controller("Home",function(){var o=this,e="Text";o.items={logo:"",name:"Austin Woodall",subhead:"Front End Developer"}});

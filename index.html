@@ -1,0 +1,104 @@
+<!doctype html>
+<html ng-app="portfolio">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="_styles/bootstrap.css">
+  <link rel="stylesheet" href="_styles/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  
+</head>
+<body ng-controller="Home as home">
+  <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <nav id="navbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="logo">
+            <div class="image"><img ng-src="{{home.items.logo}}"></div>
+            <div class="copy-wrap">
+              <div class="name">{{home.items.name}}</div>
+              <div class="tagline">{{home.items.subhead}}</div>
+            </div>
+          </div>
+          <div class="nav">
+            <ul>
+              <li>
+                <a href="#">ABOUT</a>
+              </li>
+              <li>
+                <a href="#" class="active">PORTFOLIO</a>
+              </li>
+              <li>
+                <a href="#">LINKEDIN <i class="fa fa-external-link"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </nav>
+  <div ui-view></div>
+  <section id="content">
+    <div class="container">
+      <div class="row">
+        <div ng-repeat="project in home.projects" class="col-md-4 col-sm-6">
+          <a ng-click="home.projectIsActive = true; home.selectedProject.Title = project.Title; home.selectedProject.Desc = project.Desc; home.selectedProject.Url = project.Url" class="item" style="background:{{project.Color}}">
+            <img src="{{project.Thumb}}" class="img-responsive">
+            <div class="project-text">
+              <div class="project-title">{{project.Title}}</div>
+              <div class="project-type"><span ng-repeat="tool in project.Tools">{{tool.tool}}</span></div>
+            </div>
+          </a>
+        </div>        
+      </div>
+    </div>
+  </section>
+  <section id="preview-pane" ng-class="{show: home.projectIsActive}">    
+    <div class="iframe-window">
+      <a ng-click="home.projectIsActive = false" class="iframe-close"><i class="fa fa-times"></i></a>
+      <div class="iframe-header">
+        <div class="iframe-title">{{home.selectedProject.Title}}</div>        
+        <div class="iframe-description">
+          {{home.selectedProject.Desc}}
+        </div>
+      </div>
+      <div class="iframe-resizer">
+        <div class="iframe-resizer-options">
+          <label class="active-size">
+            <i class="fa fa-mobile"></i>
+            <input type="radio" name="size" value="mobile" hidden/> 
+          </label>
+          <label>
+            <i class="fa fa-tablet"></i>
+            <input type="radio" name="size" value="tablet" hidden/> 
+          </label>
+          <label>
+            <i class="fa fa-desktop"></i>
+            <input type="radio" name="size" value="desktop" hidden/> 
+          </label>
+          <div class="iframe-pagination">
+            <button><i class="fa fa-arrow-left left"></i></button>
+            <span class="iframe-projectNumber">01</span>
+            <button><i class="fa fa-arrow-right right"></i></button>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="iframe-container" frameborder="0" height="100%" width="100%">
+        <iframe ng-src="{{trust(home.selectedProject.Url)}}"></iframe>
+      </div>
+    </div> 
+  </section>  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-sanitize.min.js"></script>
+  <script src="_app/app.js"></script>
+</body>
+</html>
