@@ -4,15 +4,7 @@ app.controller('Home', function ($sce) {
 	
 	this.projectIsActive = false;
 
-	this.selectedProject = {
-		'Title': 'replace',
-		'Desc': 'replace',
-		'Url': 'http://www.theverge.com/'
-	};
-
-	this.trust = function(src) {
-		return $sce.trustAsResourceUrl(src);
-	};
+	this.selectedProject = {};
 
 	this.items = {
 		'logo': '_images/logo.png',
@@ -31,7 +23,7 @@ app.controller('Home', function ($sce) {
 			{'tool': 'Firebase'},
 			{'tool': 'HTML5'}
 		],
-		'Url': 'http://placehold.it/',
+		'Url': $sce.trustAsResourceUrl('http://placehold.it/'),
 		},
 		{
 		'Title': 'Project 02',
@@ -42,7 +34,7 @@ app.controller('Home', function ($sce) {
 			{'tool': 'Angular'},
 			{'tool': 'Firebase'}
 		],
-		'Url': 'http://placehold.it/',
+		'Url': $sce.trustAsResourceUrl('http://theverge.com/'),
 		}
 	];
 });

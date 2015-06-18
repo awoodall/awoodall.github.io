@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/awoodall/awoodall.github.io/master/_styles/bootstrap.css">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/awoodall/awoodall.github.io/master/_styles/main.css">
+  <link rel="stylesheet" href="_styles/bootstrap.css">
+  <link rel="stylesheet" href="_styles/main.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  
 </head>
 <body ng-controller="Home as home">
@@ -48,7 +48,7 @@
     <div class="container">
       <div class="row">
         <div ng-repeat="project in home.projects" class="col-md-4 col-sm-6">
-          <a ng-click="home.projectIsActive = true; home.selectedProject.Title = project.Title; home.selectedProject.Desc = project.Desc; home.selectedProject.Url = project.Url" class="item" style="background:{{project.Color}}">
+          <a ng-click="home.projectIsActive = true; home.selectedProject = project" class="item" style="background:{{project.Color}}">
             <img src="{{project.Thumb}}" class="img-responsive">
             <div class="project-text">
               <div class="project-title">{{project.Title}}</div>
@@ -91,14 +91,13 @@
         </div>
       </div>
       <div class="iframe-container" frameborder="0" height="100%" width="100%">
-        <iframe ng-src="{{trust(home.selectedProject.Url)}}"></iframe>
+        <iframe ng-src="{{home.selectedProject.Url}}"></iframe>
       </div>
     </div> 
   </section>  
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-sanitize.min.js"></script>
-  <script src="https://cdn.rawgit.com/awoodall/awoodall.github.io/master/_app/app.js"></script>
+  <script src="_app/app.js"></script>
 </body>
 </html>
