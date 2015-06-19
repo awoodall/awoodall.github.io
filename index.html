@@ -29,13 +29,10 @@
           <div class="nav">
             <ul>
               <li>
-                <a href="#">ABOUT</a>
+                <a href="" class="active">PORTFOLIO</a>
               </li>
               <li>
-                <a href="#" class="active">PORTFOLIO</a>
-              </li>
-              <li>
-                <a href="#">LINKEDIN <i class="fa fa-external-link"></i></a>
+                <a target="_blank" href="https://www.linkedin.com/in/austinwoodall">LINKEDIN <i class="fa fa-external-link"></i></a>
               </li>
             </ul>
           </div>
@@ -60,7 +57,7 @@
     </div>
   </section>
   <section id="preview-pane" ng-class="{show: home.projectIsActive}">    
-    <div class="iframe-window">
+    <div class="iframe-window" ng-class="{'iframe-window-show': home.projectIsActive}">
       <a ng-click="home.projectIsActive = false" class="iframe-close"><i class="fa fa-times"></i></a>
       <div class="iframe-header">
         <div class="iframe-title">{{home.selectedProject.Title}}</div>        
@@ -70,28 +67,31 @@
       </div>
       <div class="iframe-resizer">
         <div class="iframe-resizer-options">
-          <label class="active-size">
+          <label ng-class="{'active-size': home.windowSize === 'mobile'}" ng-click="home.windowSize = 'mobile'">
             <i class="fa fa-mobile"></i>
             <input type="radio" name="size" value="mobile" hidden/> 
           </label>
-          <label>
+          <label ng-class="{'active-size': home.windowSize === 'tablet'}" ng-click="home.windowSize = 'tablet'">
             <i class="fa fa-tablet"></i>
             <input type="radio" name="size" value="tablet" hidden/> 
           </label>
-          <label>
+          <label ng-class="{'active-size': home.windowSize === 'desktop'}" ng-click="home.windowSize = 'desktop'">
             <i class="fa fa-desktop"></i>
             <input type="radio" name="size" value="desktop" hidden/> 
           </label>
+          <span class="label">Click to resize the viewport</span>
           <div class="iframe-pagination">
-            <button><i class="fa fa-arrow-left left"></i></button>
-            <span class="iframe-projectNumber">01</span>
-            <button><i class="fa fa-arrow-right right"></i></button>
+            <button ng-click="home.prev(home.selectedProject.pos)" ng-disabled="home.selectedProject.pos === 0"><i class="fa fa-arrow-left left"></i></button>
+            <span class="iframe-projectNumber">{{home.selectedProject.id}}</span>
+            <button ng-click="home.next(home.selectedProject.pos)" ng-disabled="home.selectedProject.id === home.projects.length"><i class="fa fa-arrow-right right"></i></button>
           </div>
           <div class="clear"></div>
         </div>
       </div>
-      <div class="iframe-container" frameborder="0" height="100%" width="100%">
-        <iframe ng-src="{{home.selectedProject.Url}}"></iframe>
+      <div class="iframe-container">
+        <div class="iframe-inner-container">
+          <iframe ng-class="{desktop: home.windowSize === 'desktop', tablet: home.windowSize === 'tablet', mobile: home.windowSize === 'mobile'}" ng-src="{{home.selectedProject.Url}}" frameborder="0" height="100%" width="100%"></iframe>
+        </div>
       </div>
     </div> 
   </section>  

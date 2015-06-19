@@ -4,12 +4,26 @@ app.controller('Home', function ($sce) {
 	
 	this.projectIsActive = false;
 
+	this.windowSize = 'desktop';
+
 	this.selectedProject = {};
 
 	this.items = {
 		'logo': '_images/logo.png',
 		'name': 'Austin Woodall',
 		'subhead': 'Front End Developer'
+	};
+
+	this.next = function (pos) {
+		pos ++;
+		this.selectedProject = this.projects[pos];
+		console.log(pos);
+	};
+
+	this.prev = function (pos) {
+		pos --;
+		this.selectedProject = this.projects[pos];
+		console.log(pos);
 	};
 	
 	this.projects = [
@@ -24,6 +38,8 @@ app.controller('Home', function ($sce) {
 			{'tool': 'HTML5'}
 		],
 		'Url': $sce.trustAsResourceUrl('http://placehold.it/'),
+		'id': 1,
+		'pos': 0
 		},
 		{
 		'Title': 'Project 02',
@@ -34,7 +50,9 @@ app.controller('Home', function ($sce) {
 			{'tool': 'Angular'},
 			{'tool': 'Firebase'}
 		],
-		'Url': $sce.trustAsResourceUrl('http://theverge.com/'),
+		'Url': $sce.trustAsResourceUrl('http://getbootstrap.com/'),
+		'id': 2,
+		'pos': 1
 		}
 	];
 });
